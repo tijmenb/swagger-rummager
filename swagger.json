@@ -1,0 +1,675 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "GOV.UK Search",
+    "description": "Search API for GOV.UK",
+    "version": "1.0.0"
+  },
+  "host": "www.gov.uk",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/api",
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/search.json": {
+      "get": {
+        "summary": "Do a search",
+        "parameters": [
+          {
+            "name": "q",
+            "type": "string",
+            "description": "Text to search for",
+            "in": "query"
+          },
+          {
+            "name": "count",
+            "type": "number",
+            "description": "Number of documents to retrieve",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "name": "start",
+            "description": "Position in search result list to start returning results (0-based)",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "order",
+            "description": "The sort order. A fieldname, with an optional preceding '-' to sort in descending order. If not specified, sort order is relevance",
+            "enum": [
+              "closing_date",
+              "public_timestamp",
+              "title",
+              "tribunal_decision_decision_date"
+            ],
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "name": "fields",
+            "description": "Fields to return",
+            "default": [
+              "description",
+              "display_type",
+              "document_series",
+              "format",
+              "link",
+              "organisations",
+              "policy_areas",
+              "public_timestamp",
+              "slug",
+              "specialist_sectors",
+              "title",
+              "topics",
+              "world_locations"
+            ],
+            "enum": [
+              "acronym",
+              "aircraft_category",
+              "aircraft_type",
+              "alert_issue_date",
+              "alert_type",
+              "all_searchable_text",
+              "attachments",
+              "build_end_date",
+              "build_start_date",
+              "case_state",
+              "case_type",
+              "closed_date",
+              "closing_date",
+              "contact_group",
+              "content_id",
+              "date_of_occurrence",
+              "description",
+              "detailed_format",
+              "development_sector",
+              "display_type",
+              "document_collections",
+              "document_series",
+              "eligible_entities",
+              "fault_type",
+              "faulty_item_model",
+              "faulty_item_type",
+              "first_published_at",
+              "format",
+              "fund_state",
+              "fund_type",
+              "funding_amount",
+              "funding_source",
+              "government_name",
+              "grant_type",
+              "has_act_paper",
+              "has_command_paper",
+              "has_official_document",
+              "hmrc_manual_section_id",
+              "id",
+              "important_to_policy",
+              "indexable_content",
+              "is_historic",
+              "is_political",
+              "is_withdrawn",
+              "issued_date",
+              "land_use",
+              "latest_change_note",
+              "link",
+              "location",
+              "mainstream_browse_pages",
+              "manual",
+              "manufacturer",
+              "market_sector",
+              "medical_specialism",
+              "metadata",
+              "opened_date",
+              "operational_field",
+              "organisation_state",
+              "organisations",
+              "outcome_type",
+              "people",
+              "policies",
+              "policy_areas",
+              "policy_groups",
+              "popularity",
+              "public_timestamp",
+              "railway_type",
+              "registration",
+              "release_timestamp",
+              "relevant_to_local_government",
+              "report_type",
+              "search_format_types",
+              "serial_number",
+              "slug",
+              "specialist_sectors",
+              "spelling_text",
+              "statistics_announcement_state",
+              "therapeutic_area",
+              "tiers_or_standalone_items",
+              "title",
+              "topics",
+              "tribunal_decision_categories",
+              "tribunal_decision_categories_name",
+              "tribunal_decision_category",
+              "tribunal_decision_category_name",
+              "tribunal_decision_country",
+              "tribunal_decision_country_name",
+              "tribunal_decision_decision_date",
+              "tribunal_decision_judges",
+              "tribunal_decision_judges_name",
+              "tribunal_decision_landmark",
+              "tribunal_decision_landmark_name",
+              "tribunal_decision_reference_number",
+              "tribunal_decision_sub_categories",
+              "tribunal_decision_sub_categories_name",
+              "tribunal_decision_sub_category",
+              "tribunal_decision_sub_category_name",
+              "updated_at",
+              "value_of_funding",
+              "vessel_type",
+              "world_locations"
+            ],
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "name": "debug",
+            "description": "Debug flags",
+            "default": [
+
+            ],
+            "enum": [
+              "disable_best_bets",
+              "disable_popularity",
+              "disable_synonyms",
+              "explain",
+              "new_weighting"
+            ],
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_aircraft_category",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_report_type",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "date",
+            "name": "filter_date_of_occurrence",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_location",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_content_id",
+            "description": "The content_id of the item. This will not be present for all items, as most application do not send it.",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_format",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_link",
+            "description": "The link to the document.  This is usually the path component of the URL of the document, including a leading slash, but sometimes omits the leading slash, and is sometimes an absolute URL of related content which does not appear on GOV.UK",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_mainstream_browse_pages",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_organisations",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_policies",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "date",
+            "name": "filter_public_timestamp",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_specialist_sectors",
+            "description": "The navigation \"topics\" that the document is assigned to.  Nothing to do with \"policy areas\"",
+            "in": "query"
+          },
+          {
+            "type": "date",
+            "name": "filter_updated_at",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_tribunal_decision_category",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_tribunal_decision_category_name",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "date",
+            "name": "filter_tribunal_decision_decision_date",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_tribunal_decision_judges",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_tribunal_decision_judges_name",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_tribunal_decision_landmark",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_tribunal_decision_landmark_name",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_tribunal_decision_reference_number",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_tribunal_decision_sub_category",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_tribunal_decision_sub_category_name",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_case_type",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_case_state",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_market_sector",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_outcome_type",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "date",
+            "name": "filter_opened_date",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "date",
+            "name": "filter_closed_date",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_contact_group",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_grant_type",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_land_use",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_tiers_or_standalone_items",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_funding_amount",
+            "description": "Funding (per unit per year)",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_therapeutic_area",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "date",
+            "name": "filter_first_published_at",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_detailed_format",
+            "description": "A slugified version of the display_type field",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_display_type",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_document_collections",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_document_series",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_id",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_operational_field",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_organisation_state",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_people",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_policy_areas",
+            "description": "Policy areas are managed in Whitehall. They're an old grouping of policies, which we're expecting to deprecate soon.",
+            "in": "query"
+          },
+          {
+            "type": "date",
+            "name": "filter_release_timestamp",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_search_format_types",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_slug",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_statistics_announcement_state",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_topics",
+            "description": "The policy areas that the document is associated with.  Nothing to do with \"specialist sectors\"",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_world_locations",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_tribunal_decision_categories",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_tribunal_decision_categories_name",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_tribunal_decision_sub_categories",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_tribunal_decision_sub_categories_name",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_tribunal_decision_country",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_tribunal_decision_country_name",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_fund_state",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_fund_type",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_funding_source",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "date",
+            "name": "filter_closing_date",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_manual",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_hmrc_manual_section_id",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_development_sector",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_eligible_entities",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_value_of_funding",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_vessel_type",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_alert_type",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_medical_specialism",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "date",
+            "name": "filter_issued_date",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_policy_groups",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_railway_type",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_fault_type",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "date",
+            "name": "filter_alert_issue_date",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_faulty_item_type",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_manufacturer",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_faulty_item_model",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "filter_serial_number",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "date",
+            "name": "filter_build_start_date",
+            "description": "",
+            "in": "query"
+          },
+          {
+            "type": "date",
+            "name": "filter_build_end_date",
+            "description": "",
+            "in": "query"
+          }
+        ]
+      }
+    }
+  }
+}
